@@ -1,0 +1,16 @@
+{
+    "name": "ShooterPbE.Player",
+    "rootNamespace": "ShooterPbE.Player",
+    "references": [
+        "GUID:98c20d83c9beb3344bdbd3db8ff8d852"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
