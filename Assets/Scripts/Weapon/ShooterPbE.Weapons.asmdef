@@ -1,9 +1,9 @@
 {
-    "name": "ShooterPbE.Player",
-    "rootNamespace": "ShooterPbE.Player",
+    "name": "ShooterPbE.Weapons",
+    "rootNamespace": "ShooterPbE.Weapons",
     "references": [
         "GUID:98c20d83c9beb3344bdbd3db8ff8d852",
-        "GUID:8d74a281b6675634491655e856137e94"
+        "GUID:6aa0fe9b6cae35f48b08159515025c36"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

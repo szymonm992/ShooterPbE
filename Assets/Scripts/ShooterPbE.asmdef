@@ -2,8 +2,7 @@
     "name": "ShooterPbE",
     "rootNamespace": "ShooterPbE",
     "references": [
-        "GUID:98c20d83c9beb3344bdbd3db8ff8d852",
-        "GUID:65f6cae4a63531141819681ec517fa62"
+        "GUID:98c20d83c9beb3344bdbd3db8ff8d852"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

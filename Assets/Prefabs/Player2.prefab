@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 849039966866940804, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
+      propertyPath: networkId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2181796943178130550, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: m_Name
       value: Player2
@@ -25,15 +29,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6567853333048093620, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 6567853333048093620, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6567853333048093620, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 6567853333048093620, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: m_LocalRotation.w
