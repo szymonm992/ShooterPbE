@@ -6,15 +6,16 @@ namespace ShooterPbE.Damage
     public class BulletDamageApplicator : ElympicsMonoBehaviour
     {
         [SerializeField] private float damage = 1.0f;
+        [SerializeField] private ElympicsMonoBehaviour owner;
 
-        public void Detonate(StatsController statsController)
+        public void ApplyDamageTo(StatsController statsController)
         {
             if (statsController == null)
             {
                 return;
             }
 
-            statsController.ChangeHealth(-damage);
+            statsController.ChangeHealth(-damage, (int)owner.PredictableFor);
         }
     }
 }

@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 3228028611076366462}
   - component: {fileID: 3632930298016194136}
   - component: {fileID: 2878680128736587979}
-  - component: {fileID: 8607719926318593977}
   - component: {fileID: 2030223902342167063}
   - component: {fileID: 5925649515655891430}
   - component: {fileID: 4082374578039765707}
   - component: {fileID: 5087761035884930329}
   - component: {fileID: 7821367492816472216}
+  - component: {fileID: 3392928567733438561}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -126,19 +126,6 @@ MonoBehaviour:
   isKinematicConfig:
     synchronizationEnabled: 0
     tolerance: 0
---- !u!114 &8607719926318593977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2181796943178130550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 842d51ba6f4173241ba664b3cea58a2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerId: 0
 --- !u!114 &2030223902342167063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecfabf32b735f64b988f15ea842074a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 10
+  deathController: {fileID: 3392928567733438561}
+  playerId: 0
 --- !u!114 &5925649515655891430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputProvider: {fileID: 5087761035884930329}
-  playerStats: {fileID: 8607719926318593977}
+  playerStats: {fileID: 2030223902342167063}
   playerMovement: {fileID: 5925649515655891430}
   shootingSystem: {fileID: 7821367492816472216}
   cursorController: {fileID: 0}
@@ -217,6 +206,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentEquipedWeapon: {fileID: 7010286301365083730}
+--- !u!114 &3392928567733438561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2181796943178130550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae404d50dbf5f044bcc0d46cfe3e281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTime: 2
+  statsController: {fileID: 2030223902342167063}
 --- !u!1 &5852155638598586120
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 21
+  networkId: 25
   predictableFor:
     playerIndex: 0
   isUpdatableForNonOwners: 0

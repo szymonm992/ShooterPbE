@@ -9,10 +9,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 849039966866940804, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: networkId
-      value: 3
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 849039966866940804, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: predictableFor.playerIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030223902342167063, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
+      propertyPath: playerId
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2181796943178130550, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}

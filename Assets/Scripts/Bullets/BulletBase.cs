@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using Elympics;
 using ShooterPbE.Damage;
@@ -51,7 +50,7 @@ namespace ShooterPbE.Bullets
 
         protected virtual void DealDamage()
         {
-            damageApplicator.Detonate(currentStatisticsComponent);
+            damageApplicator.ApplyDamageTo(currentStatisticsComponent);
             deathTimer.Value = lifeTime;
         }
 

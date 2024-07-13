@@ -1,13 +1,14 @@
 using Elympics;
 using UnityEngine;
 using ShooterPbE.Player;
+using ShooterPbE;
 
 namespace ShooterPbE.Inputs
 {
     public class InputsController : ElympicsMonoBehaviour, IInputHandler, IUpdatable
     {
         [SerializeField] private InputsProvider inputProvider;
-        [SerializeField] private PlayerData playerStats;
+        [SerializeField] private StatsController playerStats;
         [SerializeField] private PlayerMovementController playerMovement;
         [SerializeField] private PlayerShootingSystem shootingSystem;
         [SerializeField] private CursorController cursorController;

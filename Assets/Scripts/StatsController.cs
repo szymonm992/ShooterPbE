@@ -6,39 +6,47 @@ namespace ShooterPbE
 {
     public class StatsController : ElympicsMonoBehaviour, IInitializable
     {
-        public event Action<float, float> HealthValueChangedEvent;
-        public event Action DiedEvent;
+        public event Action<float, float> HealthValueChanged = null;
 
-        public bool IsDead => currentHealth <= 0;
+        public int PlayerId => playerId;
 
         [SerializeField] private float maxHealth = 100.0f;
+        [SerializeField] private DeathController deathController = null;
+        [SerializeField] private int playerId = 0;
 
-        private ElympicsFloat currentHealth = new ElympicsFloat(0);
-
+        private ElympicsFloat health = new ElympicsFloat(0);
+       
         public void Initialize()
         {
-            currentHealth.Value = maxHealth;
-            currentHealth.ValueChanged += OnHealthValueChanged;
+            health.Value = maxHealth;
+            health.ValueChanged += OnHealthValueChanged;
+
+            deathController.PlayerRespawned += ResetPlayerStats;
         }
 
-        public void ChangeHealth(float value)
+        private void ResetPlayerStats()
         {
-            if (!Elympics.IsServer || IsDead)
+            health.Value = maxHealth;
+        }
+
+        public void ChangeHealth(float value, int damageOwner)
+        {
+            if (!Elympics.IsServer || deathController.IsDead.Value)
             {
                 return;
             }
-            Debug.Log($"prev: {currentHealth}");
-            currentHealth.Value += value;
-            Debug.Log($"aft: {currentHealth}");
-            if (currentHealth.Value <= 0.0f)
+
+            health.Value += value;
+
+            if (health.Value <= 0.0f)
             {
-                DiedEvent?.Invoke();
+                deathController.ProcessPlayersDeath(damageOwner);
             }
         }
 
-        private void OnHealthValueChanged(float _, float newValue)
+        private void OnHealthValueChanged(float lastValue, float newValue)
         {
-            HealthValueChangedEvent?.Invoke(newValue, maxHealth);
+            HealthValueChanged?.Invoke(newValue, maxHealth);
         }
     }
 }
