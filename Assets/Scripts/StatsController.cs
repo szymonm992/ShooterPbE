@@ -21,15 +21,15 @@ namespace ShooterPbE
             currentHealth.ValueChanged += OnHealthValueChanged;
         }
 
-        public void ChangeHealth(float value, int damageOwner)
+        public void ChangeHealth(float value)
         {
             if (!Elympics.IsServer || IsDead)
             {
                 return;
             }
-
+            Debug.Log($"prev: {currentHealth}");
             currentHealth.Value += value;
-
+            Debug.Log($"aft: {currentHealth}");
             if (currentHealth.Value <= 0.0f)
             {
                 DiedEvent?.Invoke();

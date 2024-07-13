@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: networkId
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 849039966866940804, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
+      propertyPath: predictableFor.playerIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2181796943178130550, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: m_Name
       value: Player2
@@ -33,7 +37,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6567853333048093620, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.19000006
       objectReference: {fileID: 0}
     - target: {fileID: 6567853333048093620, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: m_LocalPosition.z

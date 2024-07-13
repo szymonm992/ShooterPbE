@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShooterPbE.Player
 {
-    public class PlayerStatistics : MonoBehaviour
+    public class PlayerData : MonoBehaviour
     {
         [Header("Parameters:")]
         [SerializeField] private int playerId = 0;

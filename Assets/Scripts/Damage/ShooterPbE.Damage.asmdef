@@ -1,10 +1,9 @@
 {
-    "name": "ShooterPbE.Bullets",
-    "rootNamespace": "ShooterPbE.Bullets",
+    "name": "ShooterPbE.Damage",
+    "rootNamespace": "ShooterPbE.Damage",
     "references": [
         "GUID:98c20d83c9beb3344bdbd3db8ff8d852",
-        "GUID:3f4884d6aa17b7c4f984885d5fddffaf",
-        "GUID:6d46dea949eaa384cab74667a8af9eac"
+        "GUID:3f4884d6aa17b7c4f984885d5fddffaf"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

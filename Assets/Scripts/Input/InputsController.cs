@@ -7,7 +7,7 @@ namespace ShooterPbE.Inputs
     public class InputsController : ElympicsMonoBehaviour, IInputHandler, IUpdatable
     {
         [SerializeField] private InputsProvider inputProvider;
-        [SerializeField] private PlayerStatistics playerStats;
+        [SerializeField] private PlayerData playerStats;
         [SerializeField] private PlayerMovementController playerMovement;
         [SerializeField] private PlayerShootingSystem shootingSystem;
         [SerializeField] private CursorController cursorController;

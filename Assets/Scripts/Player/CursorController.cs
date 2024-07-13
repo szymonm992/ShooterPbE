@@ -1,6 +1,4 @@
-using Elympics;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShooterPbE.Player
 {
@@ -11,7 +9,6 @@ namespace ShooterPbE.Player
         public Vector3 WorldCursorPosition {get; private set;}
 
         [SerializeField] private RectTransform cursorImageTransform;
-        [SerializeField] private Transform debugTrans;
 
         private Vector3 lastCursorPosition;
 
@@ -39,7 +36,7 @@ namespace ShooterPbE.Player
         
         private void ProcessCursorCalculations()
         {
-            var mouseRay = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Epsilon));
+            var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             lastCursorPosition = WorldCursorPosition;
 
             if (Physics.Raycast(mouseRay, out var hit))
@@ -51,7 +48,6 @@ namespace ShooterPbE.Player
                 WorldCursorPosition = lastCursorPosition;
             }
 
-            debugTrans.position = WorldCursorPosition;
             cursorImageTransform.position = Input.mousePosition;
         }
     }

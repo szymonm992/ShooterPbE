@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using Elympics;
-//using ShooterPbE.Damage;
+using ShooterPbE.Damage;
 
 namespace ShooterPbE.Bullets
 {
-    public abstract class BulletBase : ElympicsMonoBehaviour, IUpdatable, IInitializable
+    public abstract class BulletBase : ElympicsMonoBehaviour, IUpdatable
     {
+        private const float COLLISION_DETECTION_DISTANCE = 1f;
+
         public float LifeTime => lifeTime;
 
         [Header("Parameters:")]
@@ -15,44 +17,31 @@ namespace ShooterPbE.Bullets
 
         [Header("References:")]
         [SerializeField] protected new Rigidbody rigidbody = null;
-        //[SerializeField] protected new BulletDamageApplicator damageApplicator = null;
+        [SerializeField] protected BulletDamageApplicator damageApplicator = null;
+        [SerializeField] protected LayerMask shellCollisionMask;
 
         protected ElympicsGameObject owner = new ElympicsGameObject();
-        protected ElympicsBool readyToDealDamage = new ElympicsBool(false);
-        protected ElympicsBool markedAsReadyToDestroy = new ElympicsBool(false);
-        protected ElympicsBool bulletHit = new ElympicsBool(false);
-        protected ElympicsFloat deathTimer = new ElympicsFloat(0.0f);
+        private ElympicsFloat deathTimer = new ElympicsFloat(0.0f);
 
         private StatsController currentStatisticsComponent = null;
 
         public virtual void ElympicsUpdate()
         {
-            if (readyToDealDamage.Value && !bulletHit)
-            {
-                DealDamage();
-            }
-
-            if (markedAsReadyToDestroy.Value)
-            {
-                ElympicsDestroy(this.gameObject);
-            }
-
             deathTimer.Value += Elympics.TickDuration;
 
-            if ((!bulletHit && deathTimer >= lifeTime))
+            if (deathTimer.Value >= lifeTime)
             {
                 DestroyProjectile();
+            }
+            else
+            {
+                DetectCollision();
             }
         }
 
         public void SetOwner(ElympicsBehaviour owner)
         {
             this.owner.Value = owner;
-        }
-
-        public void Initialize()
-        {
-            StartCoroutine(SelfDestoryTimer(lifeTime));
         }
 
         public void Launch(Vector3 direction)
@@ -62,46 +51,42 @@ namespace ShooterPbE.Bullets
 
         protected virtual void DealDamage()
         {
-            //damageApplicator.Detonate(currentStatisticsComponent);
-
-            bulletHit.Value = true;
-            deathTimer.Value = 0.0f;
+            damageApplicator.Detonate(currentStatisticsComponent);
+            deathTimer.Value = lifeTime;
         }
 
         private void ApplyBulletMovement(Vector3 direction)
         {
-            Debug.DrawRay(transform.position, direction, Color.red);
-            rigidbody.AddForce(direction * speed, ForceMode.VelocityChange);
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            ApplyBulletMovement(Vector3.zero);
-
-            if (collision.gameObject.TryGetComponent(out currentStatisticsComponent))
+            if (direction != Vector3.zero)
             {
-                MarkBulletAsReadyToDealDamage();
+                rigidbody.AddForce(direction * speed, ForceMode.VelocityChange);
             }
             else
             {
-                DestroyProjectile();
+                rigidbody.velocity = Vector3.zero;
             }
         }
 
-        private IEnumerator SelfDestoryTimer(float time)
+        private void DetectCollision()
         {
-            yield return new WaitForSeconds(time);
-            DestroyProjectile();
+            if (Physics.Raycast(transform.position, transform.forward, out var rayHit, COLLISION_DETECTION_DISTANCE, shellCollisionMask))
+            {
+                ApplyBulletMovement(Vector3.zero);
+
+                if (rayHit.collider.transform.root.TryGetComponent(out currentStatisticsComponent))
+                {
+                    DealDamage();
+                }
+                else
+                {
+                    DestroyProjectile();
+                }
+            }
         }
 
         private void DestroyProjectile()
         {
-            markedAsReadyToDestroy.Value = true;
-        }
-
-        private void MarkBulletAsReadyToDealDamage()
-        {
-            readyToDealDamage.Value = true;
+            ElympicsDestroy(this.gameObject);
         }
     }
 }
