@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a10590763b38646b715fa59b67e199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToStartMatch: 5
+  timeToStartMatch: 20
 --- !u!114 &202070525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1813,6 +1813,7 @@ MonoBehaviour:
   screenCanvasGroup: {fileID: 1211372727}
   gameStateController: {fileID: 202070525}
   playersManager: {fileID: 1068619449}
+  returnButton: {fileID: 1774486442}
 --- !u!1 &1234608624
 GameObject:
   m_ObjectHideFlags: 0
@@ -3125,7 +3126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dd69312d23b714bbfe28952227da7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeForPlayersToConnect: 30
+  timeForPlayersToConnect: 60
   connectingTimeoutCheckDelta: 5
   shouldGameEndAfterAnyDisconnect: 0
 --- !u!114 &7939587856370792283

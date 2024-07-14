@@ -1,7 +1,5 @@
-using Cysharp.Threading.Tasks;
 using Elympics;
 using JetBrains.Annotations;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +10,7 @@ namespace ShooterPbE.GUI
         public static string MATCHMAKING_QUEUE = "1v1";
 
         [SerializeField] private Button startGameButton;
+        [SerializeField] private CanvasGroup loadingScreenGroup;
 
         private void Start()
         {
@@ -28,6 +27,7 @@ namespace ShooterPbE.GUI
         private void StartButtonClicked()
         {
             TogglePlayButton(false);
+            ToggleLoadingScreen(true);
             PlayOnline();
         }
 
@@ -43,6 +43,11 @@ namespace ShooterPbE.GUI
         private void TogglePlayButton(bool value)
         {
             startGameButton.interactable = value;
+        }
+
+        private void ToggleLoadingScreen(bool value)
+        {
+            loadingScreenGroup.alpha = value ? 1.0f : 0.0f;
         }
     }
 }

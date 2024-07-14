@@ -7,8 +7,6 @@ namespace ShooterPbE
 {
     public class GameStateController : ElympicsMonoBehaviour, IInitializable, IUpdatable
     {
-        private const float ENDING_GAME_TIME_THRESHOLD = 5f;
-
         public ElympicsInt CurrentGameState { get; } = new((int)GameState.Beginning);
 
         [SerializeField] private GameInitializer gameInitializer = null;
@@ -30,14 +28,8 @@ namespace ShooterPbE
             if (playersProvider.WinnerPlayerId.Value >= 0 && (GameState)CurrentGameState.Value == GameState.Inprogress)
             {
                 ChangeGameState(GameState.Ending);
-                EndGameAfterTime(ENDING_GAME_TIME_THRESHOLD).Forget();
+                Elympics.EndGame();
             }
-        }
-
-        private async UniTask EndGameAfterTime(float seconds)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(seconds), true);
-            Elympics.EndGame();
         }
     }
 }

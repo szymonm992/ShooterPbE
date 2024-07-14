@@ -1,5 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace ShooterPbE.GUI
 {
@@ -10,6 +13,7 @@ namespace ShooterPbE.GUI
         [SerializeField] private CanvasGroup screenCanvasGroup = null;
         [SerializeField] private GameStateController gameStateController = null;
         [SerializeField] private PlayersManager playersManager = null;
+        [SerializeField] private Button returnButton;
 
         private void Start()
         {
@@ -20,6 +24,11 @@ namespace ShooterPbE.GUI
 
             playersManager.WinnerPlayerId.ValueChanged += SetWinnerInfo;
             gameStateController.CurrentGameState.ValueChanged += SetScreenDisplayBasedOnCurrentGameState;
+            returnButton.onClick.AddListener(OnReturnToMenuButtonClicked);
+        }
+        private void OnReturnToMenuButtonClicked()
+        {
+            SceneManager.LoadScene(0);
         }
 
         private void OnDestroy()
@@ -31,6 +40,7 @@ namespace ShooterPbE.GUI
 
             playersManager.WinnerPlayerId.ValueChanged -= SetWinnerInfo;
             gameStateController.CurrentGameState.ValueChanged -= SetScreenDisplayBasedOnCurrentGameState;
+            returnButton.onClick.RemoveAllListeners();
         }
 
         private void SetWinnerInfo(int lastValue, int newValue)
@@ -45,13 +55,16 @@ namespace ShooterPbE.GUI
             else
             {
                 titleText.text = "You LOSE!";
-                gameWinnerText.text = $"Player {winnerData.transform.gameObject.name} has won the game!";
+                gameWinnerText.text = $"Player {winnerData?.transform.gameObject.name} has won the game!";
             }
         }
 
         private void SetScreenDisplayBasedOnCurrentGameState(int lastGameState, int newGameState)
         {
-            screenCanvasGroup.alpha = (GameState)newGameState == GameState.Ending ? 1.0f : 0.0f;
+            bool isEnding = (GameState)newGameState == GameState.Ending;
+            screenCanvasGroup.alpha = isEnding ? 1.0f : 0.0f;
+            screenCanvasGroup.interactable = isEnding;
+            screenCanvasGroup.blocksRaycasts = isEnding;
         }
     }
 }

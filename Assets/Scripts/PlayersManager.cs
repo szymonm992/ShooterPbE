@@ -72,21 +72,5 @@ namespace ShooterPbE
                 }
             }
         }
-
-        private void UnSubscribeDeathControllers()
-        {
-            foreach (var stats in AllPlayersInScene)
-            {
-                if (stats != null && stats.TryGetComponent(out DeathController deathController))
-                {
-                    deathController.HasBeenKilled -= ProcessPlayerDeath;
-                }
-            }
-        }
-
-        private void OnDestroy()
-        {
-            UnSubscribeDeathControllers();
-        }
     }
 }
