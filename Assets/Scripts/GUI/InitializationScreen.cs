@@ -13,8 +13,14 @@ namespace ShooterPbE.GUI
         private void Awake()
         {
             gameInitializer.CurrentTimeToStartMatch.ValueChanged += UpdateTimeToStartMatchDisplay;
-
             ProcessScreenViewAtStartOfTheGame();
+            countdownToStartMatchText.text = "Awaiting for all players to connect...";
+        }
+
+        private void OnDestroy()
+        {
+            gameInitializer.CurrentTimeToStartMatch.ValueChanged -= UpdateTimeToStartMatchDisplay;
+            gameStateController.CurrentGameState.ValueChanged -= SetScreenDisplayBasedOnCurrentGameState;
         }
 
         private void ProcessScreenViewAtStartOfTheGame()

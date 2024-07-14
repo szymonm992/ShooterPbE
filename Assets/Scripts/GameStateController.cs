@@ -1,15 +1,18 @@
 using UnityEngine;
 using Elympics;
 using Cysharp.Threading.Tasks;
+using System;
 
 namespace ShooterPbE
 {
     public class GameStateController : ElympicsMonoBehaviour, IInitializable, IUpdatable
     {
+        private const float ENDING_GAME_TIME_THRESHOLD = 5f;
+
+        public ElympicsInt CurrentGameState { get; } = new((int)GameState.Beginning);
+
         [SerializeField] private GameInitializer gameInitializer = null;
         [SerializeField] private PlayersManager playersProvider;
-
-        public ElympicsInt CurrentGameState { get; } = new ((int)GameState.Beginning);
 
         public async void Initialize()
         {
@@ -27,8 +30,14 @@ namespace ShooterPbE
             if (playersProvider.WinnerPlayerId.Value >= 0 && (GameState)CurrentGameState.Value == GameState.Inprogress)
             {
                 ChangeGameState(GameState.Ending);
-                Elympics.EndGame();
+                EndGameAfterTime(ENDING_GAME_TIME_THRESHOLD).Forget();
             }
+        }
+
+        private async UniTask EndGameAfterTime(float seconds)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(seconds), true);
+            Elympics.EndGame();
         }
     }
 }

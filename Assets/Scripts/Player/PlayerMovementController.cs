@@ -12,7 +12,6 @@ namespace ShooterPbE.Player
 
         [SerializeField] private float movementSpeed = 10.0f;
         [SerializeField] private float acceleration = 50.0f;
-        [SerializeField] private float rotationSpeed = 360f;
         [SerializeField] private float jumpForce = 10.0f;
         [SerializeField] private Rigidbody rig;
         [SerializeField] private CursorController cursorController;

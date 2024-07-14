@@ -2,16 +2,20 @@ using Elympics;
 using UnityEngine;
 using ShooterPbE.Player;
 using ShooterPbE;
+using System;
 
 namespace ShooterPbE.Inputs
 {
-    public class InputsController : ElympicsMonoBehaviour, IInputHandler, IUpdatable
+    public class InputsController : ElympicsMonoBehaviour, IInputHandler, IUpdatable, IInitializable
     {
         [SerializeField] private InputsProvider inputProvider;
         [SerializeField] private StatsController playerStats;
         [SerializeField] private PlayerMovementController playerMovement;
         [SerializeField] private PlayerShootingSystem shootingSystem;
         [SerializeField] private CursorController cursorController;
+        
+        private GameStateController gameStateController;
+        private bool canProcessInputs = false;
 
         public void OnInputForBot(IInputWriter inputSerializer)
         {
@@ -25,7 +29,7 @@ namespace ShooterPbE.Inputs
 
         public void ElympicsUpdate()
         {
-            if (!playerStats.IsDead && ElympicsBehaviour.TryGetInput(ElympicsPlayer.FromIndex(playerStats.PlayerId), out var inputReader))
+            if (canProcessInputs && !playerStats.IsDead && ElympicsBehaviour.TryGetInput(ElympicsPlayer.FromIndex(playerStats.PlayerId), out var inputReader))
             {
                 inputReader.Read(out float forwardMovement);
                 inputReader.Read(out float rightMovement);
@@ -53,6 +57,24 @@ namespace ShooterPbE.Inputs
 
             inputWriter.Write(inputProvider.Shoot);
             inputWriter.Write(inputProvider.Jump);
+        }
+
+        public void Initialize()
+        {
+            //NOTE: This kidn of weird/ugly constructions can be easily replaced with Dependency Injection, however
+            //due to time limits I'm doing it this way
+            gameStateController = FindObjectOfType<GameStateController>();
+            gameStateController.CurrentGameState.ValueChanged += OnGameStateChanged;
+        }
+
+        private void OnDestroy()
+        {
+            gameStateController.CurrentGameState.ValueChanged -= OnGameStateChanged;
+        }
+
+        private void OnGameStateChanged(int lastValue, int newValue)
+        {
+            canProcessInputs = (GameState)newValue == GameState.Inprogress;
         }
     }
 }

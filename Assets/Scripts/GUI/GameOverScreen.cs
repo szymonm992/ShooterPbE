@@ -22,6 +22,17 @@ namespace ShooterPbE.GUI
             gameStateController.CurrentGameState.ValueChanged += SetScreenDisplayBasedOnCurrentGameState;
         }
 
+        private void OnDestroy()
+        {
+            if (playersManager.IsServer)
+            {
+                return;
+            }
+
+            playersManager.WinnerPlayerId.ValueChanged -= SetWinnerInfo;
+            gameStateController.CurrentGameState.ValueChanged -= SetScreenDisplayBasedOnCurrentGameState;
+        }
+
         private void SetWinnerInfo(int lastValue, int newValue)
         {
             var winnerData = playersManager.GetPlayerById(newValue);

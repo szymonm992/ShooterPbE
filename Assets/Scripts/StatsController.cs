@@ -21,13 +21,6 @@ namespace ShooterPbE
         {
             health.Value = maxHealth;
             health.ValueChanged += OnHealthValueChanged;
-
-            deathController.PlayerRespawned += ResetPlayerStats;
-        }
-
-        private void ResetPlayerStats()
-        {
-            health.Value = maxHealth;
         }
 
         public void ChangeHealth(float value, int damageOwner)

@@ -6,8 +6,6 @@ namespace ShooterPbE
 {
     public class DeathController : ElympicsMonoBehaviour
     {
-        public event Action<StatsController> PlayerRespawnEvent;
-        public event Action PlayerRespawned;
         public event Action<int, int> HasBeenKilled;
 
         public ElympicsBool IsDead { get; } = new ElympicsBool(false);

@@ -10,7 +10,6 @@ namespace ShooterPbE.Inputs
         public Vector2 Movement { get; private set; }
         public Vector3 WorldCursorPosition { get; private set; }
 
-        [SerializeField] private float mouseSensivity = 1.5f;
         [SerializeField] private CursorController cursorController;
 
         private void Update()
