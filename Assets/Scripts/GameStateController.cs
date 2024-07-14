@@ -7,6 +7,8 @@ namespace ShooterPbE
 {
     public class GameStateController : ElympicsMonoBehaviour, IInitializable, IUpdatable
     {
+        public int GAME_ENDING_TIME_THRESHOLD = 10000;
+
         public ElympicsInt CurrentGameState { get; } = new((int)GameState.Beginning);
 
         [SerializeField] private GameInitializer gameInitializer = null;
@@ -34,7 +36,7 @@ namespace ShooterPbE
 
         private async UniTask EndGameDelay()
         {
-            await UniTask.Delay(10000);
+            await UniTask.Delay(GAME_ENDING_TIME_THRESHOLD);
             Elympics.EndGame();
         }
     }
