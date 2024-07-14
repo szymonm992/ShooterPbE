@@ -28,8 +28,14 @@ namespace ShooterPbE
             if (playersProvider.WinnerPlayerId.Value >= 0 && (GameState)CurrentGameState.Value == GameState.Inprogress)
             {
                 ChangeGameState(GameState.Ending);
-                Elympics.EndGame();
+                EndGameDelay().Forget();
             }
+        }
+
+        private async UniTask EndGameDelay()
+        {
+            await UniTask.Delay(10000);
+            Elympics.EndGame();
         }
     }
 }
