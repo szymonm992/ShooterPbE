@@ -25,7 +25,7 @@ namespace ShooterPbE.Inputs
 
         public void ElympicsUpdate()
         {
-            if (ElympicsBehaviour.TryGetInput(ElympicsPlayer.FromIndex(playerStats.PlayerId), out var inputReader))
+            if (!playerStats.IsDead && ElympicsBehaviour.TryGetInput(ElympicsPlayer.FromIndex(playerStats.PlayerId), out var inputReader))
             {
                 inputReader.Read(out float forwardMovement);
                 inputReader.Read(out float rightMovement);

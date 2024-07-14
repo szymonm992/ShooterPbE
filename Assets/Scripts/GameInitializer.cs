@@ -6,13 +6,13 @@ namespace ShooterPbE
 {
     public class GameInitializer : ElympicsMonoBehaviour, IUpdatable
     {
-        private Action OnMatchInitializedAssignedCallback;
+        private event Action OnMatchInitializedAssignedCallback;
 
-        public ElympicsFloat CurrentTimeToStartMatch { get; } = new ElympicsFloat(0.0f);
+        public ElympicsFloat CurrentTimeToStartMatch { get; } = new (0.0f);
 
         [SerializeField] private float timeToStartMatch = 5.0f;
 
-        private ElympicsBool gameInitializationEnabled = new ElympicsBool(false);
+        private ElympicsBool gameInitializationEnabled = new (false);
 
         public void InitializeMatch(Action OnMatchInitializedCallback)
         {

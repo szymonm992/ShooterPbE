@@ -6,24 +6,36 @@ namespace ShooterPbE.GUI
     public class GameOverScreen : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI gameWinnerText = null;
+        [SerializeField] private TextMeshProUGUI titleText = null;
         [SerializeField] private CanvasGroup screenCanvasGroup = null;
-
         [SerializeField] private GameStateController gameStateController = null;
-        [SerializeField] private PlayerScoresManager playerScoresManager = null;
-        [SerializeField] private PlayersProvider playersProvider = null;
+        [SerializeField] private PlayersManager playersManager = null;
 
-        private void Awake()
+        private void Start()
         {
-            playerScoresManager.WinnerPlayerId.ValueChanged += SetWinnerInfo;
+            if (playersManager.IsServer)
+            {
+                return;
+            }
 
+            playersManager.WinnerPlayerId.ValueChanged += SetWinnerInfo;
             gameStateController.CurrentGameState.ValueChanged += SetScreenDisplayBasedOnCurrentGameState;
         }
 
         private void SetWinnerInfo(int lastValue, int newValue)
         {
-            var winnerData = playersProvider.GetPlayerById(newValue);
+            var winnerData = playersManager.GetPlayerById(newValue);
 
-            gameWinnerText.text = $"Player {winnerData.transform.gameObject.name} won the game!";
+            if (playersManager.ClientPlayer == winnerData)
+            {
+                titleText.text = "You WIN!";
+                gameWinnerText.text = "Congratulations!";
+            }
+            else
+            {
+                titleText.text = "You LOSE!";
+                gameWinnerText.text = $"Player {winnerData.transform.gameObject.name} has won the game!";
+            }
         }
 
         private void SetScreenDisplayBasedOnCurrentGameState(int lastGameState, int newGameState)

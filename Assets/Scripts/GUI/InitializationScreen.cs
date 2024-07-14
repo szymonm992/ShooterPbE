@@ -7,7 +7,6 @@ namespace ShooterPbE.GUI
     {
         [SerializeField] private TextMeshProUGUI countdownToStartMatchText = null;
         [SerializeField] private CanvasGroup screenCanvasGroup = null;
-
         [SerializeField] private GameStateController gameStateController = null;
         [SerializeField] private GameInitializer gameInitializer = null;
 

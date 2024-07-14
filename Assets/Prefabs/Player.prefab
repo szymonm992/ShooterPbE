@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ecfabf32b735f64b988f15ea842074a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 5
   deathController: {fileID: 3392928567733438561}
   playerId: 0
 --- !u!114 &5925649515655891430
@@ -218,7 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae404d50dbf5f044bcc0d46cfe3e281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathTime: 2
   statsController: {fileID: 2030223902342167063}
 --- !u!1 &5852155638598586120
 GameObject:
@@ -417,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 25
+  networkId: 28
   predictableFor:
     playerIndex: 0
   isUpdatableForNonOwners: 0

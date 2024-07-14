@@ -8,6 +8,7 @@ namespace ShooterPbE
     {
         public event Action<float, float> HealthValueChanged = null;
 
+        public bool IsDead => health.Value <= 0;
         public int PlayerId => playerId;
 
         [SerializeField] private float maxHealth = 100.0f;

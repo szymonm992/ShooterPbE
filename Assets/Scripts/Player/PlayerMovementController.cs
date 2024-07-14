@@ -56,12 +56,14 @@ namespace ShooterPbE.Player
             rig.MoveRotation(desiredRotation);
         }
 
+        #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             Gizmos.color = IsGrounded ? Color.green : Color.red;
             Gizmos.DrawCube(transform.position - (Vector3.up * GROUND_CHECK_Y_OFFSET),
             new Vector3(GROUND_CHECK_DIMENSIONS_HORIZONTAL, GROUND_CHECK_DIMENSIONS_VERTICAL, GROUND_CHECK_DIMENSIONS_HORIZONTAL));
         }
+        #endif
     }
 }
 
