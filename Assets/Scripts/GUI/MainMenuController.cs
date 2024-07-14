@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Elympics;
+using JetBrains.Annotations;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ namespace ShooterPbE.GUI
 {
     public class MainMenuController : MonoBehaviour
     {
-        public static string MATCHMAKING_QUEUE = "Default";
+        public static string MATCHMAKING_QUEUE = "1v1";
 
         [SerializeField] private Button startGameButton;
 
@@ -27,27 +28,21 @@ namespace ShooterPbE.GUI
         private void StartButtonClicked()
         {
             TogglePlayButton(false);
-            StartBattle();
+            PlayOnline();
         }
 
-        private async void StartBattle()
+        [UsedImplicitly]
+        public async void PlayOnline()
         {
-            var (closestRegion, latency) = await FindClosestRegion();
-            ElympicsLobbyClient.Instance.PlayOnlineInRegion(closestRegion, null, null, MATCHMAKING_QUEUE);
-            Debug.Log($"Connecting to region {closestRegion} with ping {latency}");
+            var (region, latency) = await ClosestRegionFinder.GetClosestRegion();
+            ElympicsLobbyClient.Instance.PlayOnlineInRegion(region, null, null, MATCHMAKING_QUEUE);
+
+            Debug.Log($"Joined matchmaking in region: {region} with ping {latency}");
         }
 
         private void TogglePlayButton(bool value)
         {
             startGameButton.interactable = value;
-        }
-
-        private async UniTask<(string region, float latency)> FindClosestRegion()
-        {
-            Debug.Log("Searching for closest region...");
-            var returnValue = await ElympicsCloudPing.ChooseClosestRegion(ElympicsRegions.AllAvailableRegions);
-            Debug.Log("Closest region has been cached!");
-            return returnValue;
         }
     }
 }

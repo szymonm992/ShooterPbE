@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 27
+  networkId: 3
   predictableFor:
     playerIndex: -2
   isUpdatableForNonOwners: 0
@@ -602,6 +602,10 @@ PrefabInstance:
     - target: {fileID: 7382333177826534618, guid: 602b7b25c4495654c8874c011b1fe54f, type: 3}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357688539411030824, guid: 602b7b25c4495654c8874c011b1fe54f, type: 3}
+      propertyPath: networkId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 602b7b25c4495654c8874c011b1fe54f, type: 3}
@@ -1479,7 +1483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 26
+  networkId: 2
   predictableFor:
     playerIndex: -2
   isUpdatableForNonOwners: 0
@@ -3121,7 +3125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dd69312d23b714bbfe28952227da7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeForPlayersToConnect: 60
+  timeForPlayersToConnect: 30
   connectingTimeoutCheckDelta: 5
   shouldGameEndAfterAnyDisconnect: 0
 --- !u!114 &7939587856370792283
@@ -3160,6 +3164,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 849039966866940804, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
+      propertyPath: networkId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2181796943178130550, guid: 47883c85ea4e1d44b94ab67fa88ef55d, type: 3}
       propertyPath: m_Name
       value: Player0
