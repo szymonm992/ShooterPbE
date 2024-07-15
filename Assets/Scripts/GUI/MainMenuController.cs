@@ -1,6 +1,7 @@
 using Elympics;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace ShooterPbE.GUI
@@ -11,6 +12,12 @@ namespace ShooterPbE.GUI
 
         [SerializeField] private Button startGameButton;
         [SerializeField] private CanvasGroup loadingScreenGroup;
+
+        private void Awake()
+        {
+
+            DebugManager.instance.enableRuntimeUI = false;
+        }
 
         private void Start()
         {

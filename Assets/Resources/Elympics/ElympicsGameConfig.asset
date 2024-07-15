@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameName: ShooterPbE
   gameId: 79e23c68-b3e7-4b1a-b0c3-97974d1a938e
-  gameVersion: 1.0.0.4
+  gameVersion: 1.0.0.5
   players: 2
   gameplayScene: Assets/Scenes/Main.unity
   gameplaySceneAsset: {fileID: 102900000, guid: 74835e5effde4fe4a99afedca3c77dc1, type: 3}
